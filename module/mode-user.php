@@ -14,7 +14,7 @@ function insertUser($data)
     $password = mysqli_real_escape_string($koneksi, $data['password']);
     $password2 = mysqli_real_escape_string($koneksi, $data['password2']);
     $address = mysqli_real_escape_string($koneksi, $data['address']);
-    $telephone = mysqli_real_escape_string($koneksi, $data['telepon']);
+    $telephone = mysqli_real_escape_string($koneksi, $data['telephone']);
     $privilege = mysqli_real_escape_string($koneksi, $data['privilege']);
 
     if ($password !== $password2) {
@@ -36,13 +36,13 @@ function insertUser($data)
 
     if (strlen($telephone) > 13) {
         echo '<script>
-                alert("nomor telepon tidak boleh lebih dari 13 angka!");
+                alert("nomor telephone tidak boleh lebih dari 13 angka!");
             </script>';
         return false;
     }
 
-    $cekTelepon = mysqli_query($koneksi, "SELECT telephone FROM users WHERE telephone = '$telephone'");
-    if (mysqli_num_rows($cekTelepon) > 0) {
+    $cekTelephone = mysqli_query($koneksi, "SELECT telephone FROM users WHERE telephone = '$telephone'");
+    if (mysqli_num_rows($cekTelephone) > 0) {
         echo '<script>
                 alert("nomor telephone sudah digunakan!");
             </script>';
@@ -73,7 +73,7 @@ function updateUser($data)
     $username = strtolower(mysqli_real_escape_string($koneksi, $data['username']));
     $fullname = mysqli_real_escape_string($koneksi, $data['fullname']);
     $address = mysqli_real_escape_string($koneksi, $data['address']);
-    $telepon = mysqli_real_escape_string($koneksi, $data['telepon']);
+    $telephone = mysqli_real_escape_string($koneksi, $data['telephone']);
     $privilege = mysqli_real_escape_string($koneksi, $data['privilege']);
     
 
@@ -83,7 +83,7 @@ function updateUser($data)
     $curUsername = $dataUsername['username'];
 
     // cek username  baru
-    $newUsername = mysqli_query($koneksi, "SELECT username FROM tbl_user WHERE username = '$username'");
+    $newUsername = mysqli_query($koneksi, "SELECT username FROM users WHERE username = '$username'");
 
     if ($username !== $curUsername) {
         if (mysqli_num_rows($newUsername)) {
@@ -94,11 +94,29 @@ function updateUser($data)
         }
     }
 
-    $updateQuery = "UPDATE users SET username = '$username', fullname = '$fullname', address = '$address', telepon = '$telepon', privilege = '$privilege' WHERE user_id = $user_id";
+    $updateQuery = "UPDATE users SET username = '$username', fullname = '$fullname', address = '$address', telephone = '$telephone', privilege = '$privilege' WHERE user_id = $user_id";
     mysqli_query($koneksi, $updateQuery);
 
 
     return mysqli_affected_rows($koneksi);
+}
+
+function selectUser1($level)
+{
+    $result = null;
+    if ($level === 'Admin') {
+        $result = "selected";
+    }
+    return $result;
+}
+
+function selectUser2($level)
+{
+    $result = null;
+    if ($level === 'Staff') {
+        $result = "selected";
+    }
+    return $result;
 }
 
 ?>
