@@ -7,25 +7,20 @@ if(!isset($_SESSION['ssLoginHotel'])){
     exit();
 }
 
-require '../config/config.php';
-require '../config/function.php';
-require '../module/mode-user.php';
+require_once '../module/mode-user.php';
+require_once '../config/config.php';
+require_once '../config/function.php';
 
 $title = "Data User | Hotel";
-require '../template/header.php';
-require '../template/navbar.php';
-require '../template/sidebar.php';
+include_once '../template/header.php';
+include_once '../template/sidebar.php';
+include_once '../template/navbar.php';
 
 ?>
 
 
-<div>
-    
-</div>
-
-
 <?php
 
-require '../template/footer.php';
+require_once '../template/footer.php';
 
 ?>
