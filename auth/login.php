@@ -19,8 +19,8 @@ if (isset($_POST['login'])) {
         $row = mysqli_fetch_assoc($queryLogin);
         if (password_verify($password, $row['password'])) {
             $_SESSION['ssLoginHotel'] = true;
-            // $_SESSION['ssUserHotel'] = $username;
-            $_SESSION['ssFullName'] = $row['fullname'];
+            $_SESSION['ssUserHotel'] = $username;
+            // $_SESSION['ssFullName'] = $row['fullname'];
 
             header('Location: ../dashboard.php');
             exit();

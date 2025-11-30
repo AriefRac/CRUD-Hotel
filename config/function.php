@@ -14,7 +14,7 @@ function getData($sql){
 
 function userLogin(){
     $userActive = $_SESSION['ssUserHotel'];
-    $dataUser = getData("SELECT * FROM tbl_user WHERE username = '$userActive'")[0];
+    $dataUser = getData("SELECT * FROM users WHERE username = '$userActive'")[0];
 
     return $dataUser;
 }
