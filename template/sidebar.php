@@ -58,7 +58,7 @@
 
           <!-- Menu Item Bookings -->
           <li>
-            <a href="<?= $main_url ?>bookings/data-bookings.php"
+            <a href="<?= $main_url ?>bookings/"
               @click="selected = (selected === 'Bookings' ? '':'Bookings')" class="menu-item group"
               :class=" (selected === 'Bookings') && (page === 'Bookings') ? 'menu-item-active' : 'menu-item-inactive'">
               <svg
@@ -78,7 +78,7 @@
 
           <!-- Menu Item Guest -->
           <li>
-            <a href="<?= $main_url ?>guest/data-guest.php" @click="selected = (selected === 'Guest' ? '':'Guest')"
+            <a href="<?= $main_url ?>guest/" @click="selected = (selected === 'Guest' ? '':'Guest')"
               class="menu-item group"
               :class=" (selected === 'Guest') && (page === 'Guest') ? 'menu-item-active' : 'menu-item-inactive'">
               <svg
@@ -98,7 +98,7 @@
 
           <!-- Menu Item Rooms -->
           <li>
-            <a href="<?= $main_url ?>rooms/data-rooms.php" @click="selected = (selected === 'Rooms' ? '':'Rooms')"
+            <a href="<?= $main_url ?>rooms/" @click="selected = (selected === 'Rooms' ? '':'Rooms')"
               class="menu-item group"
               :class=" (selected === 'Rooms') && (page === 'Rooms') ? 'menu-item-active' : 'menu-item-inactive'">
               <svg 
@@ -120,7 +120,7 @@
 
           <!-- Menu Item Room Types -->
           <li>
-            <a href="<?= $main_url ?>room-types/data-Room-Types.php"
+            <a href="<?= $main_url ?>room-types/"
               @click="selected = (selected === 'Room-Types' ? '':'Room-Types')" class="menu-item group"
               :class=" (selected === 'Room-Types') && (page === 'Room-Types') ? 'menu-item-active' : 'menu-item-inactive'">
               <svg
@@ -140,7 +140,7 @@
 
           <!-- Menu Item User -->
           <li>
-            <a href="<?= $main_url ?>user/data-user.php" @click="selected = (selected === 'User' ? '':'User')"
+            <a href="<?= $main_url ?>user/" @click="selected = (selected === 'User' ? '':'User')"
               class="menu-item group"
               :class=" (selected === 'User') && (page === 'User') ? 'menu-item-active' : 'menu-item-inactive'">
               <svg
