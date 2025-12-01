@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2025 at 03:26 PM
+-- Generation Time: Dec 01, 2025 at 07:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,8 +34,7 @@ CREATE TABLE `bookings` (
   `check_in` date NOT NULL,
   `check_out` date NOT NULL,
   `total_price` decimal(10,2) NOT NULL,
-  `status` enum('booked','checked_in','checked_out','cancelled') NOT NULL DEFAULT 'booked',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `status` enum('booked','checked_in','checked_out','cancelled') NOT NULL DEFAULT 'booked'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -49,8 +48,7 @@ CREATE TABLE `guest` (
   `name` varchar(150) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `nik` varchar(50) DEFAULT NULL,
-  `address` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `address` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -63,16 +61,15 @@ CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
   `room_number` varchar(10) NOT NULL,
   `type_id` int(11) NOT NULL,
-  `status` enum('available','occupied','maintenance') NOT NULL DEFAULT 'available',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `status` enum('available','occupied','maintenance') NOT NULL DEFAULT 'available'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `room_number`, `type_id`, `status`, `created_at`) VALUES
-(1, 'LUX001', 1, 'available', '2025-11-29 18:21:02');
+INSERT INTO `rooms` (`id`, `room_number`, `type_id`, `status`) VALUES
+(1, 'LUX001', 1, 'available');
 
 -- --------------------------------------------------------
 
@@ -84,16 +81,15 @@ CREATE TABLE `room_types` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `room_types`
 --
 
-INSERT INTO `room_types` (`id`, `name`, `description`, `price`, `created_at`) VALUES
-(1, 'luxury', 'kamar dengan double king coil, dan jakuzi', 2500000.00, '2025-11-29 18:10:12');
+INSERT INTO `room_types` (`id`, `name`, `description`, `price`) VALUES
+(1, 'luxury', 'kamar dengan double king coil, dan jakuzi', 2500000.00);
 
 -- --------------------------------------------------------
 
@@ -108,16 +104,16 @@ CREATE TABLE `users` (
   `password` varchar(256) NOT NULL,
   `address` varchar(100) NOT NULL,
   `telephone` varchar(15) NOT NULL,
-  `privilage` enum('Admin','Staff') NOT NULL DEFAULT 'Staff',
-  `foto` varchar(100) NOT NULL
+  `privilege` enum('Admin','Staff') NOT NULL DEFAULT 'Staff'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `fullname`, `password`, `address`, `telephone`, `privilage`, `foto`) VALUES
-(1, 'admin', 'Arlen Prima', '$2y$10$35CE7VO8lu8J92OLiNjZMu.9Oy/ErvQYJpkVSJeh8X6Sqx.V9qlBu', 'Lampung Utara', '087354326134', 'Admin', '');
+INSERT INTO `users` (`user_id`, `username`, `fullname`, `password`, `address`, `telephone`, `privilege`) VALUES
+(1, 'admin', 'Arlen Prima', '$2y$10$35CE7VO8lu8J92OLiNjZMu.9Oy/ErvQYJpkVSJeh8X6Sqx.V9qlBu', 'Lampung Utara', '087354326134', 'Admin'),
+(4, 'feira', 'feira', '$2y$10$7oDX3eJq7.AAHjHICAOSM.CW3Fs5rohb4PohnLYP1PWWAFRmCo7my', 'feira', '0874319', 'Staff');
 
 --
 -- Indexes for dumped tables
@@ -189,7 +185,7 @@ ALTER TABLE `room_types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
