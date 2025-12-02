@@ -9,7 +9,7 @@ if (!isset($_SESSION['ssLoginHotel'])) {
 
 require_once '../config/config.php';
 require_once '../config/function.php';
-require_once '../module/mode-room-types.php';
+require_once '../module/mode-rooms.php';
 
 
 $title = "Tambah Room Type | Hotel";
@@ -20,8 +20,8 @@ include_once '../template/navbar.php';
 if (isset($_GET['msg'])) {
     $msg = $_GET['msg'];
     $id = $_GET['id'];
-    $sqlEdit = "SELECT * FROM room_types WHERE id = $id";
-    $roomType = getData($sqlEdit)[0];
+    $sqlEdit = "SELECT * FROM rooms WHERE id = $id";
+    $room = getData($sqlEdit)[0];
 } else {
     $msg = '';
 }
@@ -30,14 +30,14 @@ $alert = '';
 
 if (isset($_POST['simpan'])) {
     if ($msg != '') {
-        if (updateRoomsType($_POST)) {
+        if (updateRooms($_POST)) {
             $_SESSION['success_message'] = 'Data berhasil diupdate.';
             echo "<script>
                 document.location.href = 'index.php';
             </script>";
         }
     } else {
-        if (insertRoomType($_POST)) {
+        if (insertRoom($_POST)) {
             $alert = '<div x-data="{ 
                 show: false, 
                 progress: 100,
@@ -84,7 +84,7 @@ if (isset($_POST['simpan'])) {
                             </h4>
 
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                Tipe Kamar berhasil ditambahkan.
+                                Data berhasil ditambahkan.
                             </p>
                         </div>
 
@@ -110,7 +110,7 @@ if (isset($_POST['simpan'])) {
 
 <main>
     <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
-        <div x-data="{ pageName: `<?= $msg != '' ? 'Edit' : 'Tambah' ?> Room Type`}">
+        <div x-data="{ pageName: `<?= $msg != '' ? 'Edit' : 'Tambah' ?> Room`}">
             <?php require_once '../template/partials/breadcrumb.php'; ?>
         </div>
 
@@ -138,31 +138,73 @@ if (isset($_POST['simpan'])) {
                         <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
                             Id<span class="text-error-500">*</span>
                         </label>
-                        <input type="text" name="id" value="<?= $msg != '' ? $roomType['id'] : null ?>" readonly
+                        <input type="text" name="id" value="<?= $msg != '' ? $room['id'] : null ?>" readonly
                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90" />
                     </div>
                     <div>
                         <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                            Name<span class="text-error-500">*</span>
+                            Room Number<span class="text-error-500">*</span>
                         </label>
-                        <input type="text" name="name" value="<?= $msg != '' ? $roomType['name'] : null ?>"
+                        <input type="text" name="roomNumber" value="<?= $msg != '' ? $room['room_number'] : null ?>" required
                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
                     </div>
                     <div>
                         <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                            Description<span class="text-error-500">*</span>
+                            Room Type<span class="text-error-500">*</span>
                         </label>
-                        <textarea name="description" placeholder="Enter Description..." type="text" rows="6"
-                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"><?= $msg != '' ? $roomType['description'] : null ?></textarea>
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select name="typeId" required
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
+                                :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true">
+                                <?php
+                                $roomTypes = getData("SELECT * FROM room_types");
+                                foreach ($roomTypes as $rt) { ?>
+                                    <option value="<?= $rt['id']?>" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+                                        <?= $rt['id']?> | <?= $rt['name']?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </div>
                     </div>
                     <div>
                         <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                            Price<span class="text-error-500">*</span>
+                            Status<span class="text-error-500">*</span>
                         </label>
-                        <input name="price" type="text" oninput="validateNumericInput(this)"
-                            value="<?= $msg != '' ? $roomType['price'] : null ?>"
-                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
+                        <div x-data="{ isOptionSelected: false }" class="relative z-20 bg-transparent">
+                            <select name="status" required
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
+                                :class="isOptionSelected && 'text-gray-800 dark:text-white/90'"
+                                @change="isOptionSelected = true">
+                                    <option value="available" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+                                        Available
+                                    </option>
+                                    <option value="occupied" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+                                        Occupied
+                                    </option>
+                                    <option value="maintenance" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+                                        Maintenance
+                                    </option>
+                            </select>
+                            <span
+                                class="pointer-events-none absolute top-1/2 right-4 z-30 -translate-y-1/2 text-gray-500 dark:text-gray-400">
+                                <svg class="stroke-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.79175 7.396L10.0001 12.6043L15.2084 7.396" stroke="" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                        </div>
                     </div>
+                    
                 </div>
             </form>
         </div>

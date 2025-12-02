@@ -2,9 +2,9 @@
 
 session_start();
 
-if(!isset($_SESSION['ssLoginHotel'])){
-    header('Location: auth/login.php');
-    exit();
+if (!isset($_SESSION['ssLoginHotel'])) {
+  header('Location: auth/login.php');
+  exit();
 }
 
 require_once 'config/config.php';
@@ -38,13 +38,11 @@ include_once 'template/navbar.php';
 
             <div class="mt-5 flex items-end justify-between">
               <div>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Customers</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">Bookings</span>
                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
                   3,782
                 </h4>
               </div>
-
-              
             </div>
           </div>
           <!-- Metric Item End -->
@@ -61,13 +59,13 @@ include_once 'template/navbar.php';
 
             <div class="mt-5 flex items-end justify-between">
               <div>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Customers</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">Guest</span>
                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
                   3,782
                 </h4>
               </div>
 
-              
+
             </div>
           </div>
           <!-- Metric Item End -->
@@ -84,17 +82,16 @@ include_once 'template/navbar.php';
 
             <div class="mt-5 flex items-end justify-between">
               <div>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Customers</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">Rooms</span>
                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
                   3,782
                 </h4>
               </div>
-
-              
             </div>
+
           </div>
           <!-- Metric Item End -->
-           
+
           <!-- Metric Item Start -->
           <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-800">
@@ -108,13 +105,13 @@ include_once 'template/navbar.php';
 
             <div class="mt-5 flex items-end justify-between">
               <div>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Customers</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">Room Types</span>
                 <h4 class="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
                   3,782
                 </h4>
               </div>
 
-              
+
             </div>
           </div>
           <!-- Metric Item End -->
