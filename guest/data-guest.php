@@ -155,9 +155,9 @@ if (isset($_SESSION['success_message'])) {
                                 <!-- Table Body -->
                                 <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                                     <?php
-                                        $guest = getData("SELECT * FROM guest");
+                                        $guests = getData("SELECT * FROM guest");
 
-                                        foreach ($guest as $guest) : ?>
+                                        foreach ($guests as $guest) : ?>
                                     <tr>
                                         <td class="px-5 py-4 sm:px-6">
                                             <div class="flex items-center">
@@ -209,7 +209,7 @@ if (isset($_SESSION['success_message'])) {
                                         </td>
                                         <td class="px-5 py-4 sm:px-6">
                                             <div class="flex items-center gap-5">
-                                                <a href="edit-guest.php?id=<?= $guest['guest_id']?>"
+                                                <a href="edit-guest.php?id=<?= $guest['id']?>"
                                                     class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-warning-500 shadow-theme-xs hover:bg-warning-600">
                                                     <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -219,7 +219,7 @@ if (isset($_SESSION['success_message'])) {
                                                     </svg>
                                                     Edit
                                                 </a >
-                                                <a href="del-guest.php?id=<?= $guest['guest_id']?>"
+                                                <a href="del-guest.php?id=<?= $guest['id']?>"
                                                     class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-error-500 shadow-theme-xs hover:bg-error-600">
                                                     <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">

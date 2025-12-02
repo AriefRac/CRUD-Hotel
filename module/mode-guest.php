@@ -47,7 +47,7 @@ function deleteGuest($id)
 {
     global $koneksi;
 
-    $sqlDel = "DELETE FROM guest WHERE guest_id = $id";
+    $sqlDel = "DELETE FROM guest WHERE id = $id";
     mysqli_query($koneksi, $sqlDel);
 
     return mysqli_affected_rows($koneksi);
@@ -57,7 +57,7 @@ function updateGuest($data)
 {
     global $koneksi;
 
-    $guest_id = mysqli_real_escape_string($koneksi, $data['id']);
+    $id = mysqli_real_escape_string($koneksi, $data['id']);
     $name = strtolower(mysqli_real_escape_string($koneksi, $data['name']));
     $phone = mysqli_real_escape_string($koneksi, $data['phone']);
     $nik = mysqli_real_escape_string($koneksi, $data['nik']);
@@ -65,7 +65,7 @@ function updateGuest($data)
     
 
     // cek name sekarang
-    $queryName = mysqli_query($koneksi, "SELECT * FROM guest WHERE guest_id = $guest_id");
+    $queryName = mysqli_query($koneksi, "SELECT * FROM guest WHERE id = $id");
     $dataName = mysqli_fetch_assoc($queryName);
     $curName = $dataName['name'];
 
@@ -81,29 +81,12 @@ function updateGuest($data)
         }
     }
 
-    $updateQuery = "UPDATE guest SET name = '$name', phone = '$phone', nik = '$nik', address = '$address' WHERE guest_id = $guest_id";
+    $updateQuery = "UPDATE guest SET name = '$name', phone = '$phone', nik = '$nik', address = '$address' WHERE id = $id";
     mysqli_query($koneksi, $updateQuery);
 
 
     return mysqli_affected_rows($koneksi);
 }
 
-function selectGuest1($level)
-{
-    $result = null;
-    if ($level === 'Admin') {
-        $result = "selected";
-    }
-    return $result;
-}
-
-function selectGuest2($level)
-{
-    $result = null;
-    if ($level === 'Staff') {
-        $result = "selected";
-    }
-    return $result;
-}
 
 ?>
