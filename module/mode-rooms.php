@@ -38,23 +38,6 @@ function updateRooms($data)
     $typeId     = mysqli_real_escape_string($koneksi, $data['typeId']);
     $status     = mysqli_real_escape_string($koneksi, $data['status']);
 
-    // cek room number sekarang
-    $queryRN = mysqli_query($koneksi, "SELECT * FROM rooms WHERE id = $id");
-    $dataRN = mysqli_fetch_assoc($queryRN);
-    $curRN = $dataRN['name'];
-
-    // cek room number  baru
-    $newRoomNumber = mysqli_query($koneksi, "SELECT room_number FROM rooms WHERE room_number = '$roomNumber'");
-
-    if ($roomNumber !== $curRN) {
-        if (mysqli_num_rows($newRoomNumber)) {
-            echo '<script>
-                alert("name sudah terpakai, update data gagal!");
-            </script>';
-            return false;
-        }
-    }
-
     $updateQuery = "UPDATE rooms SET room_number = '$roomNumber', type_id = '$typeId', status = '$status' WHERE id = $id";
     mysqli_query($koneksi, $updateQuery);
 
