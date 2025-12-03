@@ -36,8 +36,8 @@ function updateBooking($data)
     $id = mysqli_real_escape_string($koneksi, $data['id']);
     $roomId = mysqli_real_escape_string($koneksi, $data['room_id']);
     $guestId = mysqli_real_escape_string($koneksi, $data['guest_id']);
-    $checkIn = mysqli_real_escape_string($koneksi, $data['check_id']);
-    $checkOut = mysqli_real_escape_string($koneksi, $data['check_id']);
+    $checkIn = mysqli_real_escape_string($koneksi, $data['check_in']);
+    $checkOut = mysqli_real_escape_string($koneksi, $data['check_out']);
     $totalPrice = mysqli_real_escape_string($koneksi, $data['total_price']);
     $status = mysqli_real_escape_string($koneksi, $data['status']);
     
@@ -50,5 +50,41 @@ function updateBooking($data)
     return mysqli_affected_rows($koneksi);
 }
 
+
+function selectStatus1($status)
+{
+    $result = null;
+    if ($status === 'booked') {
+        $result = "selected";
+    }
+    return $result;
+}
+
+function selectStatus2($status)
+{
+    $result = null;
+    if ($status === 'checked_in') {
+        $result = "selected";
+    }
+    return $result;
+}
+
+function selectStatus3($status)
+{
+    $result = null;
+    if ($status === 'checked_out') {
+        $result = "selected";
+    }
+    return $result;
+}
+
+function selectStatus4($status)
+{
+    $result = null;
+    if ($status === 'cancelled') {
+        $result = "selected";
+    }
+    return $result;
+}
 
 ?>
