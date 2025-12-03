@@ -9,7 +9,6 @@ if (!isset($_SESSION['ssLoginHotel'])) {
 
 require_once '../config/config.php';
 require_once '../config/function.php';
-require_once '../module/mode-user.php';
 
 $title = "Data User | Hotel";
 include_once '../template/header.php';
