@@ -1,9 +1,5 @@
 <?php
 
-if (userLogin()['privilege'] !== 'Admin') {
-    header("location:" . $main_url . "error-page.php");
-    exit();
-}
 
 function insertRoom($data)
 {
