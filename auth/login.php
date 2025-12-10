@@ -142,10 +142,10 @@ if (isset($_POST['login'])) {
                 <div class="flex items-center justify-center z-1">
                     <!-- ===== Common Grid Shape Start ===== -->
                     <div class="absolute right-0 top-0 -z-1 w-full max-w-[250px] xl:max-w-[450px]">
-                        <img src="<?= $main_url?>asset/tailadmin/build/src/images/shape/grid-01.svg" alt="grid" />
+                        <img src="<?= $main_url?>asset/tailadmin/build/images/shape/grid-01.svg" alt="grid" />
                     </div>
                     <div class="absolute bottom-0 left-0 -z-1 w-full max-w-[250px] rotate-180 xl:max-w-[450px]">
-                        <img src="<?= $main_url?>asset/tailadmin/build/src/images/shape/grid-01.svg" alt="grid" />
+                        <img src="<?= $main_url?>asset/tailadmin/build/images/shape/grid-01.svg" alt="grid" />
                     </div>
 
                     <div class="flex flex-col items-center max-w-xs">
